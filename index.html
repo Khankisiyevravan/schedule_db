@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script type="module">
+      // Import the functions you need from the SDKs you need
+      import { initializeApp } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-app.js";
+      import {
+        getDatabase,
+        ref,
+        set,
+        get,
+        push,
+      } from "https://www.gstatic.com/firebasejs/10.11.0/firebase-database.js";
+
+      // Your web app's Firebase configuration
+      // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+      const firebaseConfig = {
+        apiKey: "AIzaSyDJoOkSnleQErq6G0A23TbGjxoEb86PzuE",
+        authDomain: "schedule-18f7b.firebaseapp.com",
+        projectId: "schedule-18f7b",
+        storageBucket: "schedule-18f7b.appspot.com",
+        messagingSenderId: "622151184363",
+        appId: "1:622151184363:web:8761bc847793da4f8f33ae",
+        measurementId: "G-5M32P2R7YP",
+      };
+
+      // Initialize Firebase
+      const app = initializeApp(firebaseConfig);
+      const database = getDatabase(app);
+
+      // Yazmak için veri referansını alın
+      const dataRef = ref(database, "/data/workers");
+      var objKey = push(dataRef).key;
+      // Veri yazın
+      set(ref(database, "/data/workers/" + objKey), {
+        name: "ndfnsafasdbfasdbfbsadfb",
+      })
+        .then(() => {
+          console.log("Data successfully written!");
+        })
+        .catch((error) => {
+          console.error("Error writing data: ", error);
+        });
+
+      // Veri okuyun
+      get(dataRef)
+        .then((snapshot) => {
+          if (snapshot.exists()) {
+            const data = snapshot.val();
+            console.log(data);
+          } else {
+            console.log("No data available");
+          }
+        })
+        .catch((error) => {
+          console.error("Error reading data: ", error);
+        });
+    </script>
+  </body>
+</html>
